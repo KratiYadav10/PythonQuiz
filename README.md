@@ -1,70 +1,91 @@
 import time
 
+# In-memory data for users (username, password)
+users = {}
+
 # DBMS Questions
-dbms_quiz= [
-        
-            {
-            'question': 'What is the full form of DBMS?',
-            'options': ['Database Management System', 'Data Management System', 'Database Machine System', 'Data Base Machine System'],
-            'answer': 'Database Management System'
-        },
-             {
-            'question': 'What is the primary function of DBMS?',
+dbms_quiz = [
+    {
+        "question": "What is a primary key in a database?",
+        "options": ["A unique identifier for a record", "A foreign key", "A data type", "An index"],
+        "answer": "A unique identifier for a record"
+    },
+    {
+       'question': 'What is the primary function of DBMS?',
             'options': ['To manage files', 'To manage networks', 'To manage databases', 'To manage applications'],
             'answer': 'To manage databases'
-        },
-        {
-            'question': 'Which of the following is a type of database model?',
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database?",
+        "options": ["SELECT", "UPDATE", "INSERT", "DELETE"],
+        "answer": "SELECT"
+    },
+    {
+         'question': 'Which is the following is a popular DBMS ?',
+            'options': ['oracle', 'microsoft excel', 'google chrome', 'mozilla firefox'],
+            'answer': 'oracle'
+    },
+    {
+        'question': 'Which of the following is a type of database model?',
             'options': ['Hierarchical Model', 'Relational Model', 'Network Model', 'All of the above'],
             'answer': 'All of the above'
         },
-         {
-            'question': 'Which is the following is a popular DBMS ?',
-            'options': ['oracle', 'microsoft excel', 'google chrome', 'mozilla firefox'],
-            'answer': 'oracle'
-        },
-         {
-            'question': 'What is a primary key in a relational database?',
-            'options': ['A unique identifier for each row', 'A foreign key that references another table','A composite key made up of multiple columns','An index used for faster querying'
-],
-            'answer': ' A unique identifier for each row'
-        }
+    
+]
 
-        
-
-    ]
-# Data structure questions
+# Data Structures Questions
 ds_quiz = [
-        {
-            'question': 'Which of the following is not a linear data structure?',
-            'options': ['Array', 'Queue', 'Stack', 'Tree'],
-            'answer': 'Tree'
-        },
-        {
-            'question': 'What is the time complexity of accessing an element in an array?',
-            'options': ['O(1)', 'O(n)', 'O(log n)', 'O(n^2)'],
-            'answer': 'O(1)'
-        },
-        
-        {
-            'question': 'In a linked list, each node contains?',
-            'options': ['Data and a pointer to the next node', 'Only data', 'Only pointer', 'Data and a pointer to the previous node'],
-            'answer': 'Data and a pointer to the next node'
-        },
-        {
-            'question': 'Which data structure is used to implement a priority queue?',
-            'options': ['array', 'linked list', 'heap', 'graph'],
-            'answer': 'heap'
-        },
-        {
-            'question': 'What is the primary purpose of a stack data structure?',
+    {
+         'question': 'What is the primary purpose of a stack data structure?',
             'options': [' To store data in a sorted order', 'To optimize search operations', 'To follow the LIFO (Last-In-First-Out) principle', ' To implement recursive algorithms'],
             'answer': 'To follow the LIFO (Last-In-First-Out) principle'
-        }
-    ]
+    },
+    {
+        "question": "Which data structure uses LIFO (Last In, First Out) order?",
+        "options": ["Stack", "Queue", "Linked List", "Tree"],
+        "answer": "Stack"
+    },
+    {
+        "question": "Which algorithm is used for finding the shortest path in a graph?",
+        "options": ["Dijkstra’s Algorithm", "Quick Sort", "Bubble Sort", "Merge Sort"],
+        "answer": "Dijkstra’s Algorithm"
+    },
+    {
+        "question": "What is the time complexity of accessing an element in an array?",
+        "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+        "answer": "O(1)"
+    },
+    {
+        'question': 'Which data structure is used to implement a priority queue?',
+            'options': ['array', 'linked list', 'heap', 'graph'],
+            'answer': 'heap'
+    }
+]
 
+# Function for user registration
+def register_user():
+    print("\n--- Register ---")
+    username = input("Enter a username: ")
+    password = input("Enter a password: ")
+    
+    if username in users:
+        print("Username already exists! Please choose a different username.")
+    else:
+        users[username] = password
+        print("Registration successful! You can now log in.\n")
 
-
+# Function for user login
+def login_user():
+    print("\n--- Login ---")
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    
+    if username in users and users[username] == password:
+        print("Login successful!\n")
+        return username
+    else:
+        print("Invalid credentials! Please try again.\n")
+        return None
 
 # Function to conduct the quiz
 def conduct_quiz(quiz, course_name):
@@ -88,8 +109,26 @@ def conduct_quiz(quiz, course_name):
 
     return score
 
+# Main function to control the flow
 def main():
     print("Welcome to the Quiz Program!\n")
+    print("1. Register\n2. Login")
+    choice = input("Choose an option (1/2): ")
+
+    # Register or Login
+    if choice == '1':
+        register_user()
+        return main()  # Restart the main menu after registration
+    elif choice == '2':
+        username = login_user()
+        if not username:
+            return main()  # Restart the main menu if login failed
+    else:
+        print("Invalid choice! Exiting the program.")
+        return
+
+    # After login, allow the user to choose a course and take a quiz
+    print(f"Welcome back, {username}!\n")
     print("Choose a course to start the quiz:\n1. DBMS\n2. Data Structures")
     choice = input("Enter your choice (1/2): ")
     
