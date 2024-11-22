@@ -1,0 +1,178 @@
+'''import time
+
+# Quiz questions and answers stored in program memory
+
+# DBMS Questions
+dbms_quiz = [
+    {
+        "question": "What is a primary key in a database?",
+        "options": ["A unique identifier for a record", "A foreign key", "A data type", "An index"],
+        "answer": "A unique identifier for a record"
+    },
+    {
+        "question": "Which of the following is a type of database relationship?",
+        "options": ["One-to-One", "One-to-Many", "Many-to-Many", "All of the above"],
+        "answer": "All of the above"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database?",
+        "options": ["SELECT", "UPDATE", "INSERT", "DELETE"],
+        "answer": "SELECT"
+    }
+]
+
+# Data Structures Questions
+ds_quiz = [
+    {
+        "question": "Which data structure uses LIFO (Last In, First Out) order?",
+        "options": ["Stack", "Queue", "Linked List", "Tree"],
+        "answer": "Stack"
+    },
+    {
+        "question": "Which algorithm is used for finding the shortest path in a graph?",
+        "options": ["Dijkstra’s Algorithm", "Quick Sort", "Bubble Sort", "Merge Sort"],
+        "answer": "Dijkstra’s Algorithm"
+    },
+    {
+        "question": "What is the time complexity of accessing an element in an array?",
+        "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+        "answer": "O(1)"
+    }
+]
+
+# Function to conduct the quiz
+def conduct_quiz(quiz, course_name):
+    print(f"\nStarting {course_name} Quiz...\n")
+    score = 0
+
+    for i, question in enumerate(quiz):
+        print(f"Q{i + 1}: {question['question']}")
+        for idx, option in enumerate(question['options'], start=1):
+            print(f"{idx}. {option}")
+        
+        answer = input("Your answer (1/2/3/4): ")
+        
+        if question["options"][int(answer) - 1] == question["answer"]:
+            print("Correct!\n")
+            score += 1
+        else:
+            print(f"Incorrect. The correct answer is: {question['answer']}\n")
+        
+        time.sleep(1)
+
+    return score
+
+def main():
+    print("Welcome to the Quiz Program!\n")
+    print("Choose a course to start the quiz:\n1. DBMS\n2. Data Structures")
+    choice = input("Enter your choice (1/2): ")
+    
+    if choice == "1":
+        score = conduct_quiz(dbms_quiz, "DBMS")
+    elif choice == "2":
+        score = conduct_quiz(ds_quiz, "Data Structures")
+    else:
+        print("Invalid choice! Exiting the program.")
+        return
+
+    print(f"\nYour final score: {score}/{len(dbms_quiz) if choice == '1' else len(ds_quiz)}")
+    print("Thank you for participating in the quiz!")
+
+if __name__ == "__main__":
+    main()'''
+
+
+def main():
+    # Define questions and answers for each course
+    quiz_data = {
+        "DBMS": [
+            {
+                "question": "What does DBMS stand for?",
+                "options": ["a) Data Base Management Software", "b) Database Management System", "c) Data Backup Management System", "d) None of the above"],
+                "answer": "b"
+            },
+            {
+                "question": "Which of the following is a type of database model?",
+                "options": ["a) Hierarchical", "b) Network", "c) Relational", "d) All of the above"],
+                "answer": "d"
+            },
+            {
+                "question": "Which SQL command is used to retrieve data?",
+                "options": ["a) SELECT", "b) INSERT", "c) DELETE", "d) UPDATE"],
+                "answer": "a"
+            },
+            {
+                "question": "Which is not a property of a transaction in DBMS?",
+                "options": ["a) Atomicity", "b) Consistency", "c) Deadlock", "d) Durability"],
+                "answer": "c"
+            },
+            {
+                "question": "In an ER diagram, ellipses represent:",
+                "options": ["a) Attributes", "b) Entities", "c) Relationships", "d) Keys"],
+                "answer": "a"
+            }
+        ],
+        "Data Structure": [
+            {
+                "question": "Which data structure uses LIFO?",
+                "options": ["a) Stack", "b) Queue", "c) Linked List", "d) Tree"],
+                "answer": "a"
+            },
+            {
+                "question": "What is the time complexity of binary search?",
+                "options": ["a) O(n)", "b) O(log n)", "c) O(n^2)", "d) O(1)"],
+                "answer": "b"
+            },
+            {
+                "question": "A graph with no cycles is called a:",
+                "options": ["a) Connected graph", "b) Tree", "c) Directed graph", "d) Sparse graph"],
+                "answer": "b"
+            },
+            {
+                "question": "Which data structure is used in BFS of a graph?",
+                "options": ["a) Stack", "b) Queue", "c) Priority Queue", "d) Hash Table"],
+                "answer": "b"
+            },
+            {
+                "question": "What is the best case time complexity for quicksort?",
+                "options": ["a) O(n)", "b) O(n log n)", "c) O(n^2)", "d) O(log n)"],
+                "answer": "b"
+            }
+        ]
+    }
+
+    # Ask user to select a course
+    print("Welcome to the Quiz Program!")
+    print("Select a course to take the quiz:")
+    print("1. DBMS")
+    print("2. Data Structure")
+    choice = input("Enter your choice (1 or 2): ")
+
+    if choice == "1":
+        start_quiz("DBMS", quiz_data["DBMS"])
+    elif choice == "2":
+        start_quiz("Data Structure", quiz_data["Data Structure"])
+    else:
+        print("Invalid choice. Exiting the quiz.")
+
+def start_quiz(course_name, questions):
+    print(f"\nStarting the {course_name} quiz!")
+    score = 0
+
+    for i, question_data in enumerate(questions, start=1):
+        print(f"\nQuestion {i}: {question_data['question']}")
+        for option in question_data['options']:
+            print(option)
+        user_answer = input("Enter your answer (a, b, c, or d): ").lower()
+
+        if user_answer == question_data['answer']:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer was {question_data['answer']}.")
+
+    print(f"\nYou completed the {course_name} quiz!")
+    print(f"Your total score: {score}/{len(questions)}")
+
+if __name__ == "_main_":
+    main()
